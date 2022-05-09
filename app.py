@@ -17,6 +17,7 @@ client = MongoClient('mongodb://3.34.44.93', 27017, username="sparta", password=
 db = client.dbsparta_plus_week4
 
 
+
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
