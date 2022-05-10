@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+     <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons%7CMaterial+Icons+Outlined%7CMaterial+Icons+Two+Tone%7CMaterial+Icons+Round%7CMaterial+Icons+Sharp"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
+    <title>메인 페이지</title>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/music',
+                data: {},
+                success: function (response) {
+                    let rows = response['musics']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let artist = rows[i]['artist']
+                        let image = rows[i]['image']
+
+                        let temp_html = ` <div class="col">
+                                        <div class="card">
+                                          <img src=${image}
+                                          class="card-img-top">
+                                          <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text">${artist}</p>
+                                            <span class="material-icons-outlined">favorite_border</span>
+                                          </div>
+                                        </div>`
+                        $('#cards-box').append(temp_html)
+
+                    }
+                    console.log(response['musics'])
+                }
+            })
+        }
+
+        function posting() {
+            let url = $('#url').val()
+            let title = $('#title').val()
+            let artist = $('#artist').val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/music',
+                data: {url_give: url, title_give: title, artist_give: artist},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function open_box() {
+            $('#post-box').show()
+        }
+
+        function close_box() {
+            $('#post-box').hide()
+        }
+    </script>
+
+
+
+    <style>
+        *{
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        .card-body{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .logo{
+
+            text-align: center;
+
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            padding-top: 40px;
+
+            background-image: url("https://ifh.cc/g/vfaOAg.jpg");
+            background-size: cover;
+            background-position: center;
+
+        }
+        .card{
+            margin-top: 50px;
+            box-shadow: 0px 0px 2px 0px gray;
+
+        }
+        .music-box{
+            margin: auto;
+            min-width: 800px;
+            max-width: 1000px;
+        }
+
+        /*노래검색하기*/
+        .input-group{
+            width: 1000px;
+            margin: auto;
+        }
+
+        .music-add{
+            width: 1000px;
+            margin: auto;
+            margin-top: 30px;
+        }
+        .logo-font{
+            font-size: 60px;
+            font-weight:0;
+            color: white;
+            text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+            margin-top: 10px
+        }
+
+        .mypost {
+            font-family: 'Varela Round', sans-serif;
+
+            width: 800px;
+            margin: 20px auto 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 3px 0 gray;
+
+            display: none;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px">로그인 하기</button>
+    <div class="logo">
+        <h1 class="logo-font">뮤레카</h1>
+    </div>
+    <div>
+        <nav class="navbar navbar-light bg-light">
+            <form class="container-fluid">
+                <div class="input-group">
+                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
+                    <input type="text" class="form-control" placeholder="노래 검색하기" aria-label="Username"
+                           aria-describedby="basic-addon1">
+                    <button class="btn btn-outline-dark" type="submit"><span class="material-icons-outlined">search</span></button>
+                </div>
+            </form>
+        </nav>
+    </div>
+    <div class="music-add">
+        <div class="d-grid gap-1">
+            <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍</button>
+        </div>
+        <div class="mypost" id="post-box">
+            <div class="form-floating mb-3">
+                <input id="url" type="email" class="form-control" placeholder="name@example.com">
+                <label>URL</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="title" type="text" class="form-control" placeholder="name@example.com">
+                <label>Title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="artist" type="text" class="form-control" placeholder="name@example.com">
+                <label>artist</label>
+            </div>
+
+            <div class="mybtns">
+                <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+                <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+            </div>
+        </div>
+        <div class="mycards" id="contents">
+            <ul id="mylist">
+                <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+                </div>
+            </ul>
+        </div>
+</body>
+</html>
