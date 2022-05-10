@@ -111,11 +111,10 @@ def music_get():
     music_list = list(db1.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
 
-@app.route("/music/search", methods=["POST"])
+@app.route("/search", methods=["POST"])
 def search_get():
     music_list = list(db1.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
-
 
 
 

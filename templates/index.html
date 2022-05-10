@@ -56,7 +56,7 @@
             $('#cards-box').empty()
             $.ajax({
                 type: 'POST',
-                url: '/music/search',
+                url: '/search',
                 data: {},
                 success: function (response) {
                     let rows = response['musics']
@@ -65,7 +65,7 @@
                         let artist = rows[i]['artist']
                         let image = rows[i]['image']
                         let search = $('#search_input').val();
-                        if(image.includes(search))
+                        if(title.includes(search))
                         {
 
                             let temp_html = ` <div class="col">
@@ -199,9 +199,11 @@
         <form class="container-fluid">
             <div class="input-group">
                 <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
-                <input type="text" class="form-control" placeholder="노래 검색하기" aria-label="Username"
+                <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기" aria-label="Username"
                        aria-describedby="basic-addon1">
-                <button class="btn btn-outline-dark" type="submit"><span class="material-icons-outlined" onclick="search()">search</span>
+
+                <button type="button" class="btn btn-primary" onclick="search()">검색<button>
+
                 </button>
             </div>
         </form>
@@ -236,6 +238,6 @@
             </div>
         </ul>
     </div>
-
+</div>
 </body>
 </html>
