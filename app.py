@@ -1,8 +1,4 @@
-from flask import Flask, render_template, request, jsonify
 
-
-import requests
-from bs4 import BeautifulSoup
 from pymongo import MongoClient
 import jwt
 import datetime
@@ -115,7 +111,7 @@ def music_get():
     music_list = list(db1.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
 
-@app.route("/music", methods=["POST"])
+@app.route("/music/search", methods=["POST"])
 def search_get():
     music_list = list(db1.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})

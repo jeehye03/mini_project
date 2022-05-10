@@ -17,7 +17,9 @@
     <title>메인 페이지</title>
     <script>
         $(document).ready(function () {
-            listing();
+
+                listing();
+
         });
 
         function listing() {
@@ -54,7 +56,7 @@
             $('#cards-box').empty()
             $.ajax({
                 type: 'POST',
-                url: '/music',
+                url: '/music/search',
                 data: {},
                 success: function (response) {
                     let rows = response['musics']
@@ -63,7 +65,7 @@
                         let artist = rows[i]['artist']
                         let image = rows[i]['image']
                         let search = $('#search_input').val();
-                        lf(title.includes(search))
+                        if(image.includes(search))
                         {
 
                             let temp_html = ` <div class="col">
@@ -73,9 +75,10 @@
                                           <div class="card-body">
                                             <h5 class="card-title">${title}</h5>
                                             <p class="card-text">${artist}</p>
+                                            <span class="material-icons-outlined">favorite_border</span>
                                           </div>
                                         </div>`
-                            $('#cards-box').append(temp_html)
+                        $('#cards-box').append(temp_html)
                         }
 
                     }
@@ -198,7 +201,7 @@
                 <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
                 <input type="text" class="form-control" placeholder="노래 검색하기" aria-label="Username"
                        aria-describedby="basic-addon1">
-                <button class="btn btn-outline-dark" type="submit"><span class="material-icons-outlined">search</span>
+                <button class="btn btn-outline-dark" type="submit"><span class="material-icons-outlined" onclick="search()">search</span>
                 </button>
             </div>
         </form>
