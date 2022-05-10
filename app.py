@@ -1,3 +1,8 @@
+from flask import Flask, render_template, request, jsonify
+
+
+import requests
+from bs4 import BeautifulSoup
 from pymongo import MongoClient
 import jwt
 import datetime
@@ -5,18 +10,25 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+import requests
+from bs4 import BeautifulSoup
 
+
+
+client = MongoClient('mongodb://3.34.44.93', 27017, username="sparta", password="woowa")
+db = client.dbsparta_plus_week4
+db1 = client.mureca
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
-
 SECRET_KEY = 'SPARTA'
 
-client = MongoClient('mongodb://3.34.44.93', 27017, username="sparta", password="woowa")
-db = client.dbsparta_plus_week4
 
-
+@app.route('/')
+def login():
+    msg = request.args.get("msg")
+    return render_template('login.html', msg=msg)
 
 @app.route('/login')
 def home():
@@ -29,15 +41,6 @@ def home():
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-
-@app.route('/')
-def login():
-    msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
-
-
-
 
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
@@ -55,13 +58,10 @@ def sign_in():
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-            # .decode('utf-8')
-
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
 
 @app.route('/sign_up/save', methods=['POST'])
 def sign_up():
@@ -79,7 +79,6 @@ def sign_up():
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
-
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
     username_receive = request.form['username_give']
@@ -88,12 +87,38 @@ def check_dup():
 
 
 
+@app.route("/music", methods=["POST"])
+def music_post():
+    title_receive = request.form['title_give']
+    url_receive = request.form['url_give']
+    artist_receive = request.form['artist_give']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(url_receive, headers=headers)
+
+    soup = BeautifulSoup(data.text, 'html.parser')
+    image = soup.select_one('meta[property="og:image"]')['content']
 
 
+    doc = {
+        'title':title_receive,
+        'image':image,
+        'artist':artist_receive
+    }
+    db1.musics.insert_one(doc)
 
+    return jsonify({'msg':'등록 완료!'})
 
+@app.route("/music", methods=["GET"])
+def music_get():
+    music_list = list(db1.musics.find({}, {'_id': False}))
+    return jsonify({'musics':music_list})
 
-
+@app.route("/music", methods=["POST"])
+def search_get():
+    music_list = list(db1.musics.find({}, {'_id': False}))
+    return jsonify({'musics':music_list})
 
 
 
