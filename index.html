@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
+    <title>Title</title>
+    <style>
+        .comment-box {
+            display: flex;
+
+        }
+
+        .comment {
+            margin-left: 10px;
+        }
+
+        #comment-list {
+            overflow: auto;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            show_comment();
+        });
+
+
+        function modal() {
+            $.ajax({
+                type: 'GET',
+                url: '/modal',
+                data: {},
+                success: function (response) {
+                    let rows = response['modals']
+                    for (let i = 0; i < rows.length; i++) {
+                        let id = rows[i]['image']
+                        let id_num = id.split('?')[1]
+
+                        console.log(id_num)
+                    }
+
+                }
+            })
+        }
+
+
+        function save_comment() {
+            let comment = $('#comment').val()
+            $.ajax({
+                type: 'POST',
+                url: '/comment',
+                data: {
+                    comment_give: comment,
+
+                },
+                success: function (response) {
+                    $("#modal-post").removeClass(`is-active`)
+                    alert(response['msg'])
+                    window.location.reload()
+
+                }
+            })
+        }
+
+        function show_comment() {
+            $.ajax({
+                type: "GET",
+                url: "/comment",
+                data: {},
+                success: function (response) {
+                    let rows = response('comments')
+
+
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="mycards" id="contents">
+    <ul id="mylist">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+            <div class="col">
+                <div class="card">
+                    <img src="..."
+                         class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">타이틀</h5>
+                        <p class="card-text">가수이름</p>
+                        <button id="input-post" onclick='$("#modal-post").addClass("is-active");modal();'>댓글남기기</button>
+                    </div>
+                </div>
+
+            </div>
+    </ul>
+</div>
+
+
+<div class="modal" id="modal-post">
+    <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+    <div class="modal-content">
+        <div class="box">
+            <article class="media">
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+
+                        </p>
+                    </div>
+                    <nav class="level is-mobile">
+                        <div class="level-left">
+                            <div class="comment-box">
+                                <div class="music">
+                                    <img src="https://search.pstatic.net/common?type=n&size=174x174&quality=95&direct=true&src=https%3A%2F%2Fmusicmeta-phinf.pstatic.net%2Falbum%2F007%2F216%2F7216804.jpg%3Ftype%3Dr204Fll%26v%3D20220217175915"/>
+                                </div>
+                                <div class="comment">
+                                    <div class="comment-input">
+                                        <input id="comment" type="text" placeholder="댓글을 남겨주세요"/>
+                                        <button onclick="save_comment()">등록</button>
+                                    </div>
+                                    <div id="comment-list">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </nav>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <button class="modal-close is-large" aria-label="close"
+            onclick='$("#modal-post").removeClass("is-active")'></button>
+</div>
+
+
+<footer>developer: 항해7기 d반 3조(신제민, 김지혜, 정예빈, 이진희)</footer>
+</body>
+</html>
