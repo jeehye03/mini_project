@@ -18,7 +18,7 @@ db = client.dbsparta_plus_week4
 
 
 
-@app.route('/')
+@app.route('/login')
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
@@ -31,7 +31,7 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-@app.route('/login')
+@app.route('/')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
@@ -53,7 +53,9 @@ def sign_in():
          'id': username_receive,
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+            # .decode('utf-8')
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
@@ -82,7 +84,6 @@ def sign_up():
 def check_dup():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"username": username_receive}))
-    # print(value_receive, type_receive, exists)
     return jsonify({'result': 'success', 'exists': exists})
 
 
