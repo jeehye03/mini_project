@@ -65,6 +65,12 @@
                         let artist = rows[i]['artist']
                         let image = rows[i]['image']
                         let search = $('#search_input').val();
+                        let cho1 = $('input:checkbox[name=cho1]').is(':checked');
+                        let cho2 = $('input:checkbox[name=cho2]').is(':checked');
+
+
+
+                        if(cho1 == true){
                         if(title.includes(search))
                         {
 
@@ -79,12 +85,29 @@
                                           </div>
                                         </div>`
                         $('#cards-box').append(temp_html)
+                        }}
+                         if(cho2 == true){
+                            if(artist.includes(search))
+                        {
+
+                            let temp_html = ` <div class="col">
+                                        <div class="card">
+                                          <img src=${image}
+                                          class="card-img-top">
+                                          <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text">${artist}</p>
+                                            <span class="material-icons-outlined">favorite_border</span>
+                                          </div>
+                                        </div>`
+                        $('#cards-box').append(temp_html)
+
                         }
 
                     }
                     console.log(response['musics'])
                 }
-            })
+            },})
         }
 
         function posting() {
@@ -182,15 +205,23 @@
 
             display: none;
         }
+        .Checks{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
     </style>
 
 
 </head>
 <body>
-<button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"onclick="location.href='/' ">로그아웃</button>
-<div>
-    <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"onclick="location.href='/' ">프로필</button>
-</div>
+<button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
+        onclick="location.href='/' ">로그아웃
+</button>
+
 <div class="logo">
     <h1 class="logo-font">뮤레카</h1>
 </div>
@@ -199,12 +230,27 @@
         <form class="container-fluid">
             <div class="input-group">
                 <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
-                <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기" aria-label="Username"
+                <div class="Checks">
+                <div class="form-check">
+                    <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        타이틀
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        아티스트
+                    </label>
+                </div>
+                </div>
+                <input id='search_input' type="text" class="form-control" placeholder="검색하기" aria-label="Username"
                        aria-describedby="basic-addon1">
 
-                <button type="button" class="btn btn-primary" onclick="search()">검색<button>
 
-                </button>
+                <button type="button" class="btn btn-primary" onclick="search()">검색</button>
+
+
             </div>
         </form>
     </nav>
