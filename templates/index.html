@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" type="image⁄x-icon" href="">
         <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -46,8 +47,9 @@
 
     </head>
     <body>
+        <header>
         <div class="wrap-logo">
-            <div>
+            <div class="logo-btn">
                 <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
                         onclick="logout2()">로그아웃
                 </button>
@@ -57,46 +59,49 @@
                 <h1 class="logo-font" onclick="home()">뮤레카</h1>
             </div>
         </div>
-        <div class="search">
-            <div class="check-box">
-                <div class="search-icon">
-                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
-                </div>
-                <div class="Checks">
-                    <div class="form-check">
-                        <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            타이틀
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked"
-                               checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            아티스트
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="search-box">
-                <div class="search-box-input">
-                    <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)"
-                       aria-label="Username"
-                       aria-describedby="basic-addon1">
-                </div>
-                <div class="search-box-btn">
-                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>
-                </div>
 
-            </div>
-        </div>
+            <div class="search">
+                <div class="check-box">
+                    <div class="search-icon">
+                        <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
+                    </div>
+                    <div class="checks">
+                        <div class="form-check">
+                            <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                타이틀
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked"
+                                   checked><span class="on"></span>
+                            <label class="form-check-label" for="flexCheckChecked">
+                                아티스트
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <div class="search-box-input">
+                        <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)"
+                               aria-label="Username"
+                               aria-describedby="basic-addon1">
+                    </div>
+                    <div class="search-box-btn">
+                        <button type="button" class="btn btn-outline-dark" onclick="search()">검색</button>
+                    </div>
 
-        <div class="music-add">
-            <div class="d-grid gap-1">
-                <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍
-                </button>
+                </div>
             </div>
-        </div>
+
+            <div class="music-add">
+                <div class="d-grid gap-1">
+                    <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍
+                    </button>
+                </div>
+            </div>
+        </header>
+
         <div class="mypost" id="post-box">
             <div class="form-floating mb-3">
                 <input id="url" type="email" class="form-control">
@@ -107,7 +112,8 @@
                 <label for="comment">코멘트</label>
             </div>
             <div class="mybtns">
-                <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+                <button onclick="window.open('https://www.melon.com/')" type="button" class="btn btn-outline-dark">멜론</button>
+                <button onclick="posting()" type="button" class="btn btn-outline-dark">기록하기</button>
                 <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
             </div>
         </div>
@@ -117,6 +123,7 @@
                 </div>
             </ul>
         </div>
+
 
         <script src="{{ url_for('static', filename='mureca.js') }}"></script>
 

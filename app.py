@@ -87,6 +87,8 @@ def music_post():
     comment_receive = request.form['comment_give']
     music_list = list(db.musics.find({}, {'_id': False}))
     count = len(music_list) + 1
+    today = datetime.now()
+    time = today.strftime('%Y.%m.%d')
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -103,16 +105,16 @@ def music_post():
 
     doc = {
         'num': count,
-        'title':title,
-        'image':image,
-        'comment':comment_receive,
-        'artist':artist,
-        'url':url_receive,
-        'done':0
+        'title': title,
+        'image': image,
+        'comment': comment_receive,
+        'artist': artist,
+        'url': url_receive,
+        'time': time
     }
     db.musics.insert_one(doc)
 
-    return jsonify({'msg':'등록 완료!'})
+    return jsonify({'msg': '등록 완료!'})
 
 @app.route("/music", methods=["GET"])
 def music_get():
@@ -124,7 +126,8 @@ def music_get():
 def music_done():
     num_receive = request.form['num_give']
 
-    db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
+    db.musics.delete_one({'num': int(num_receive)})
+    # db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
 
     return jsonify({'msg': '삭제 완료!'})
 
@@ -134,7 +137,12 @@ def search_get():
     music_list = list(db.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
 
-
+# 좋아요
+@app.route('/api/like', methods=['POST'])
+def like_star():
+    sample_receive = request.form['sample_give']
+    print(sample_receive)
+    return jsonify({'msg': 'like 연결되었습니다!'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

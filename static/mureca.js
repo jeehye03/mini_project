@@ -13,51 +13,35 @@
                     let url = rows[i]['url']
                     let artist = rows[i]['artist']
                     let num = rows[i]['num']
-                    let done = rows[i]['done']
 
-                    let temp_html = ``
+                    let time = rows[i]['time']
 
-                    if ( done == 0){
-                        temp_html = ` <div class="col">
+                    let temp_html = `<div class="col">
                                             <div class="card">
-                                                 <a href="${url}"><img src=${image}
+                                                 <a href="${url}" target="_blank"><img src=${image}
                                                   class="card-img-top"></a>
-                                              <div class="card-body">
+                                                  <i class="fas fa-times delete" onclick="done_music(${num})"></i>
+                                            
+                                               <div class="card-body">
                                                     <h5 class="card-title">${title}</h5>                
                                                     <p class="card-text">${artist}</p> 
-                                                </div>
-                                                <div class="card-detail">
+                                               </div>
+                                               <div class="card-comment">
                                                      <i class="far fa-comment"></i>
                                                      <p class="card-text">${comment}</p>
-                                                 </div> 
-                                                 <div class="heart">                         
-                                                    <span class="material-icons-outlined">favorite_border</span>
-                                                </div>
-                                                <button onclick="done_music(${num})" type="button" class="btn btn-outline-primary">삭제</button>
-                                              
+                                               </div>
+                                               <div class="card-date-like">
+                                                    <div class="date">
+                                                        <span>${time}</span>
+                                                   </div>
+                                                   <div class="like">                         
+                                                       <span class="material-icons-outlined">favorite_border</span>
+                                                   </div>
+                                               </div>
+                                               
+                                               
+                                              </div>
                                         </div>`
-                    } else if ( done == 1){
-                        temp_html = ` `
-                    } else {
-                        temp_html = ` <div class="col">
-                                            <div class="card">
-                                                 <a href="${url}"><img src=${image}
-                                                  class="card-img-top"></a>
-                                              <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${artist}</p>
-                                                </div>
-                                                <div class="card-detail">
-                                                     <i class="far fa-comment"></i>
-                                                     <p class="card-text">${comment}</p>
-                                                 </div>
-                                                 <div class="heart">
-                                                    <span class="material-icons-outlined">favorite_border</span>
-                                                </div>
-
-                                        </div>`
-                    }
-
 
                     $('#cards-box').append(temp_html)
 
@@ -185,3 +169,15 @@
 
         window.location.href = '/'
     }
+
+    /*좋아요*/
+    function like(num) {
+        $.ajax({
+        type: 'POST',
+        url: '/api/like',
+        data: {sample_give:'샘플데이터'},
+        success: function (response) {
+        alert(response['msg']);
+        }
+        });
+        }
