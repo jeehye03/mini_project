@@ -13,8 +13,9 @@
                     let url = rows[i]['url']
                     let artist = rows[i]['artist']
                     let num = rows[i]['num']
-
                     let time = rows[i]['time']
+                    let like = rows[i]['like']
+
 
                     let temp_html = `<div class="col">
                                             <div class="card">
@@ -34,8 +35,9 @@
                                                     <div class="date">
                                                         <span>${time}</span>
                                                    </div>
-                                                   <div class="like">                         
-                                                       <span class="material-icons-outlined">favorite_border</span>
+                                                   <div class="like">
+                                                        <span>❤️</span>                         
+<!--                                                       <span class="material-icons-outlined">favorite_border</span>-->
                                                    </div>
                                                </div>
                                                
@@ -93,6 +95,8 @@
                         let comment = rows[i]['comment']
                         let url = rows[i]['url']
                         let artist = rows[i]['artist']
+                        let num = rows[i]['num']
+                        let time = rows[i]['time']
 
                         let search = $('#search_input').val();
                         let cho1 = $('input:checkbox[name=cho1]').is(':checked');
@@ -100,22 +104,32 @@
                         if(cho1 == true){
                         if(title.includes(search))
                         {
-                            let temp_html = ` <div class="col">
+                            let temp_html = `<div class="col">
                                             <div class="card">
-                                                 <a href="${url}"><img src=${image}
+                                                 <a href="${url}" target="_blank"><img src=${image}
                                                   class="card-img-top"></a>
-                                              <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${artist}</p>
-                                                </div>
-                                                <div class="card-detail">
+                                                  <i class="fas fa-times delete" onclick="done_music(${num})"></i>
+                                            
+                                               <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>                
+                                                    <p class="card-text">${artist}</p> 
+                                               </div>
+                                               <div class="card-comment">
                                                      <i class="far fa-comment"></i>
                                                      <p class="card-text">${comment}</p>
-                                                 </div>
-                                                 <div class="heart">
-                                                    <span class="material-icons-outlined">favorite_border</span>
-                                                </div>
-
+                                               </div>
+                                               <div class="card-date-like">
+                                                    <div class="date">
+                                                        <span>${time}</span>
+                                                   </div>
+                                                   <div class="like">
+                                                        <span>❤️</span>                         
+<!--                                                       <span class="material-icons-outlined">favorite_border</span>-->
+                                                   </div>
+                                               </div>
+                                               
+                                               
+                                              </div>
                                         </div>`
                         $('#cards-box').append(temp_html)
                         }}
@@ -124,20 +138,30 @@
                         {
                             let temp_html = `<div class="col">
                                             <div class="card">
-                                                 <a href="${url}"><img src=${image}
+                                                 <a href="${url}" target="_blank"><img src=${image}
                                                   class="card-img-top"></a>
-                                              <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${artist}</p>
-                                                </div>
-                                                <div class="card-detail">
+                                                  <i class="fas fa-times delete" onclick="done_music(${num})"></i>
+                                            
+                                               <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>                
+                                                    <p class="card-text">${artist}</p> 
+                                               </div>
+                                               <div class="card-comment">
                                                      <i class="far fa-comment"></i>
                                                      <p class="card-text">${comment}</p>
-                                                 </div>
-                                                 <div class="heart">
-                                                    <span class="material-icons-outlined">favorite_border</span>
-                                                </div>
-
+                                               </div>
+                                               <div class="card-date-like">
+                                                    <div class="date">
+                                                        <span>${time}</span>
+                                                   </div>
+                                                   <div class="like">
+                                                        <span>❤️</span>                         
+<!--                                                       <span class="material-icons-outlined">favorite_border</span>-->
+                                                   </div>
+                                               </div>
+                                               
+                                               
+                                              </div>
                                         </div>`
                         $('#cards-box').append(temp_html)
                         }
@@ -146,13 +170,6 @@
                 }
             },})
         }
-
-
-
-
-
-
-
 
     /* 포스팅 박스 열고 닫기*/
     function open_box() {
@@ -170,14 +187,3 @@
         window.location.href = '/'
     }
 
-    /*좋아요*/
-    function like(num) {
-        $.ajax({
-        type: 'POST',
-        url: '/api/like',
-        data: {sample_give:'샘플데이터'},
-        success: function (response) {
-        alert(response['msg']);
-        }
-        });
-        }
