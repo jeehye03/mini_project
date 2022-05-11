@@ -4,7 +4,7 @@ import jwt
 import datetime
 import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
-from werkzeug.utils import secure_filename
+
 from datetime import datetime, timedelta
 import requests
 from bs4 import BeautifulSoup
@@ -12,12 +12,13 @@ from bs4 import BeautifulSoup
 
 
 client = MongoClient('mongodb://3.34.44.93', 27017, username="sparta", password="woowa")
+
 db = client.dbsparta_plus_week4
 db1 = client.mureca
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
+
 SECRET_KEY = 'SPARTA'
 
 
@@ -50,7 +51,7 @@ def sign_in():
     if result is not None:
         payload = {
          'id': username_receive,
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 1)  # 로그인 1시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -67,10 +68,7 @@ def sign_up():
     doc = {
         "username": username_receive,
         "password": password_hash,
-        "profile_name": username_receive,
-        "profile_pic": "",
-        "profile_pic_real": "profile_pics/profile_placeholder.png",
-        "profile_info": ""
+
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
@@ -115,6 +113,10 @@ def music_get():
 def search_get():
     music_list = list(db1.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
+
+
+
+
 
 
 
