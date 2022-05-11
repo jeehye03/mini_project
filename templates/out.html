@@ -79,6 +79,7 @@
                     success: function (response) {
                         console.log(username,password)
                         alert('탈퇴하셨습니다')
+                        $.removeCookie('mytoken', {path: '/'});
                         window.location.replace("/")
                         }
                     }
