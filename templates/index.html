@@ -29,8 +29,8 @@
 
         });
 
-        function home(){
-            window.location.href=('/login')
+        function home() {
+            window.location.href = ('/login')
         }
 
 
@@ -49,8 +49,8 @@
 <div class="wrap-logo">
     <div>
         <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
-            onclick="logout2()">로그아웃
-         </button>
+                onclick="logout2()">로그아웃
+        </button>
 
     </div>
     <div class="logo">
@@ -61,65 +61,75 @@
     <nav class="navbar navbar-light bg-light">
         <form class="container-fluid">
             <div class="input-group">
-                <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
+                <div class="search-icon">
+                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
+                </div>
                 <div class="Checks">
-                <div class="form-check">
-                    <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        타이틀
-                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            타이틀
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked"
+                               checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            아티스트
+                        </label>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        아티스트
-                    </label>
-                </div>
-                </div>
-                <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)" aria-label="Username"
+            </div>
+        </form>
+    </nav>
+                <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)"
+                       aria-label="Username"
                        aria-describedby="basic-addon1">
                 <button type="button" class="btn btn-primary" onclick="search()">검색</button>
-{#    <div>#}
-{#        <nav class="navbar navbar-light bg-light">#}
-{#            <form class="container-fluid">#}
-{#                <div class="input-group">#}
-{#                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>#}
-{#                    <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기"#}
-{#                           aria-label="Username"#}
-{#                           aria-describedby="basic-addon1">#}
-{#                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>#}
-{#                </div>#}
-{#            </form>#}
-{#        </nav>#}
-{#    </div>#}
-    <div class="music-add">
-        <div class="d-grid gap-1">
-            <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍</button>
-        </div>
-    </div>
-        <div class="mypost" id="post-box">
-            <div class="form-floating mb-3">
-                <input id="url" type="email" class="form-control">
-                <label>URL</label>
-            </div>
-            <div class="form-floating">
-                <textarea id="comment" class="form-control"></textarea>
-                <label for="comment">코멘트</label>
+                {#    <div>#}
+                {#        <nav class="navbar navbar-light bg-light">#}
+                {#            <form class="container-fluid">#}
+                {#                <div class="input-group">#}
+                {#                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>#}
+                {#                    <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기"#}
+                {#                           aria-label="Username"#}
+                {#                           aria-describedby="basic-addon1">#}
+                {#                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>#}
+                {#                </div>#}
+                {#            </form>#}
+                {#        </nav>#}
+                {#    </div>#}
             </div>
 
-            <div class="mybtns">
-                <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
-                <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
-            </div>
-        </div>
-        <div class="mycards" id="contents">
-            <ul id="mylist">
-                <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+                <div class="music-add">
+                    <div class="d-grid gap-1">
+                        <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍
+                        </button>
+                    </div>
                 </div>
-            </ul>
-        </div>
+                <div class="mypost" id="post-box">
+                    <div class="form-floating mb-3">
+                        <input id="url" type="email" class="form-control">
+                        <label>URL</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea id="comment" class="form-control"></textarea>
+                        <label for="comment">코멘트</label>
+                    </div>
 
-    <script src="{{ url_for('static', filename='mureca.js') }}"></script>
+                    <div class="mybtns">
+                        <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+                        <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+                    </div>
+                </div>
+                <div class="mycards" id="contents">
+                    <ul id="mylist">
+                        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+                        </div>
+                    </ul>
+                </div>
+
+                <script src="{{ url_for('static', filename='mureca.js') }}"></script>
 
 </body>
 </html>
