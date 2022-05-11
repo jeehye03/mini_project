@@ -7,13 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bulma CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <!-- Font Awesome CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
-
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/style.css">
     <link
             href="https://fonts.googleapis.com/css?family=Material+Icons%7CMaterial+Icons+Outlined%7CMaterial+Icons+Two+Tone%7CMaterial+Icons+Round%7CMaterial+Icons+Sharp"
@@ -40,79 +37,92 @@
 
 </head>
 <body>
-<div class="wrap-logo">
-    <div>
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
-            onclick="location.href='/' ">로그아웃
-         </button>
-
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
-                onclick="location.href='/' ">프로필
-        </button>
-    </div>
-    <div class="logo">
-        <h1 class="logo-font">뮤레카</h1>
-    </div>
+<button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
+        onclick="location.href='/' ">로그아웃
+</button>
+<div>
+    <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
+            onclick="location.href='/' ">프로필
+    </button>
 </div>
-    <div>
-        <nav class="navbar navbar-light bg-light">
-            <form class="container-fluid">
-                <div class="input-group">
-                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
-                    <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기"
-                           aria-label="Username"
-                           aria-describedby="basic-addon1">
-                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>
-                </div>
-            </form>
-        </nav>
+<div class="logo">
+    <h1 class="logo-font">뮤레카</h1>
+</div>
+<div>
+    <nav class="navbar navbar-light bg-light">
+        <form class="container-fluid">
+            <div class="input-group">
+                <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
+                <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기" aria-label="Username"
+                       aria-describedby="basic-addon1">
+                <button type="button" class="btn btn-primary" onclick="search()">검색</button>
+            </div>
+        </form>
+    </nav>
+</div>
+<div class="music-add">
+    <div class="d-grid gap-1">
+        <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍</button>
     </div>
-    <div class="music-add">
-        <div class="d-grid gap-1">
-            <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍</button>
+    <div class="mypost" id="post-box">
+        <div class="form-floating mb-3">
+            <input id="url" type="email" class="form-control">
+            <label>URL</label>
         </div>
-        <div class="mypost" id="post-box">
-            <div class="form-floating mb-3">
-                <input id="url" type="email" class="form-control">
-                <label>URL</label>
-            </div>
-            <div class="form-floating">
-                <textarea id="comment" class="form-control"></textarea>
-                <label for="comment">코멘트</label>
-            </div>
-
-            <div class="mybtns">
-                <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
-                <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
-            </div>
-        </div>
-        <div class="mycards" id="contents">
-            <ul id="mylist">
-                <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-                </div>
-            </ul>
+        <div class="form-floating">
+            <textarea id="comment" class="form-control"></textarea>
+            <label for="comment">코멘트</label>
         </div>
 
-        <div class="modal" id="modal-post">
-            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
-            <div class="modal-content">
-                <div class="box">
-                    <article class="media">
-                        <div class="media-content">
-                            <input type="text"  placeholder="um.."/>
-                            <button>수정하기</button>
+        <div class="mybtns">
+            <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+    <div class="mycards" id="contents">
+        <ul id="mylist">
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+            </div>
+        </ul>
+    </div>
+    <div class="modal" id="modal-post">
+        <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+        <div class="modal-content">
+            <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="field">
+                            <p class="control">
+
+                            </p>
                         </div>
-                    </article>
-                </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                                <div class="comment-box">
+                                    <div class="music">
+                                        <img src="https://search.pstatic.net/common?type=n&size=174x174&quality=95&direct=true&src=https%3A%2F%2Fmusicmeta-phinf.pstatic.net%2Falbum%2F007%2F216%2F7216804.jpg%3Ftype%3Dr204Fll%26v%3D20220217175915"/>
+                                    </div>
+                                    <div class="comment">
+                                        <div class="comment-input">
+                                            <input id="comment-modal" type="text" placeholder="댓글을 남겨주세요"/>
+                                            <button onclick="save_comment()">등록</button>
+                                        </div>
+                                        <div id="comment-list">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                </article>
             </div>
-            <button id="input-post" onclick='$("#modal-post").addClass("is-active")'>댓글남기기</button>
-            <button class="modal-close is-large" aria-label="close"
-                    onclick='$("#modal-post").removeClass("is-active")'></button>
         </div>
 
-
-
-    <script src="{{ url_for('static', filename='mureca.js') }}"></script>
+        <button class="modal-close is-large" aria-label="close"
+                onclick='$("#modal-post").removeClass("is-active")'></button>
+    </div>
 </div>
+<script src="{{ url_for('static', filename='mureca.js') }}"></script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-    /* 음악 기록*/
     function listing() {
         $.ajax({
             type: 'GET',
@@ -10,54 +9,17 @@
                     let title = rows[i]['title']
                     let image = rows[i]['image']
                     let comment = rows[i]['comment']
-                    let url = rows[i]['url']
-                    let artist = rows[i]['artist']
-                    let num = rows[i]['num']
-                    let done = rows[i]['done']
 
-                    let temp_html = ``
-
-                    if ( done == 0){
-                        temp_html = ` <div class="col">
+                    let temp_html = ` <div class="col">
                                             <div class="card">
-                                                 <a href="${url}"><img src=${image}
-                                                  class="card-img-top"></a>
+                                              <a href=""><img src=${image}
+                                              class="card-img-top"></a>
                                               <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>                
-                                                    <p class="card-text">${artist}</p> 
-                                                </div>
-                                                <div class="card-detail">
-                                                     <i class="far fa-comment"></i>
-                                                     <p class="card-text">${comment}</p>
-                                                 </div> 
-                                                 <div class="heart">                         
-                                                    <span class="material-icons-outlined">favorite_border</span>
-                                                </div>
-                                                <button onclick="done_music(${num})" type="button" class="btn btn-outline-primary">삭제</button>
-                                              
+                                                <h6 class="card-title">${title}</h6>
+                                                 <p class="card-text">${comment}</p>
+                                                <span class="material-icons-outlined">favorite_border</span>
+                                              </div>
                                         </div>`
-                    } else if ( done == 1){
-                        temp_html = ` `
-                    } else {
-                        temp_html = ` <div class="col">
-                                            <div class="card">
-                                                 <a href="${url}"><img src=${image}
-                                                  class="card-img-top"></a>
-                                              <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${artist}</p>
-                                                </div>
-                                                <div class="card-detail">
-                                                     <i class="far fa-comment"></i>
-                                                     <p class="card-text">${comment}</p>
-                                                 </div>
-                                                 <div class="heart">
-                                                    <span class="material-icons-outlined">favorite_border</span>
-                                                </div>
-
-                                        </div>`
-                    }
-
 
                     $('#cards-box').append(temp_html)
 
@@ -65,8 +27,6 @@
             }
         })
     }
-// 모달창 여는 함수//
-// onclick='$("#modal-post").addClass("is-active")'
 
     function posting() {
         let url = $('#url').val()
@@ -81,20 +41,7 @@
             }
         });
     }
-// 게시글 삭제
-    function done_music(num){
-            $.ajax({
-                type: "POST",
-                url: "/music/done",
-                data: {num_give:num},
-                success: function (response) {
-                    alert(response["msg"])
-                    window.location.reload()
-                }
-            });
-        }
 
-    /* 검색 */
     function search() {
         $('#cards-box').empty()
         $.ajax({
@@ -128,7 +75,6 @@
             }
         })
     }
-
 
 
 

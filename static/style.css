@@ -1,115 +1,71 @@
-/** 로고 **/
+
+        .logo {
+
+            text-align: center;
+
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            padding-top: 40px;
+
+            background-image: url("https://ifh.cc/g/vfaOAg.jpg");
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .card {
+            margin-top: 50px;
+            box-shadow: 0px 0px 2px 0px gray;
 
 
-.logo {
+        }
 
-    text-align: center;
+        .music-box {
+            margin: auto;
+            min-width: 800px;
+            max-width: 1000px;
+        }
 
-    width: 200px;
-    height: 200px;
-    margin: auto;
-    padding-top: 40px;
+        /*노래검색하기*/
+        .input-group {
+            width: 1000px;
+            margin: auto;
+        }
 
-    background-image: url("https://ifh.cc/g/vfaOAg.jpg");
-    background-size: cover;
-    background-position: center;
+        .music-add {
+            width: 1000px;
+            margin: auto;
+            margin-top: 30px;
+        }
 
-}
- @keyframes fontFlip{
-    from{
-    transform:rotateY(0);
-    }
+        .logo-font {
+            font-size: 60px;
+            font-weight: 0;
+            color: white;
+            text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+            margin-top: 10px
+        }
 
-     to{
-    transform:rotateY(360deg);
-     }
-}
-.logo-font {
-    font-size: 60px;
-    font-weight: 0;
-    color: white;
-    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
-    margin-top: 10px;
-    animation:fontFlip 2s ease-in-out;
+        .mypost {
+            font-family: 'Varela Round', sans-serif;
 
-}
-/** 게시물 등록 박스 **/
-.mybtns{
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-}
+            width: 500px;
+            margin: 20px auto 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 3px 0 gray;
 
-.mybtns > button{
-    margin-right: 10px;
-}
+            display: none;
+        }
 
+        .card-body{
+            display: flex;
+            flex-direction: column;
 
+        }
+        .col:hover{
+            transform:scale(1.1);
+            transition:transform .5s;
 
-/* 게시물 */
-
-/*.card-body {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-
-/*}*/
-
-.col:hover {
-    transform: scale(1.1);
-    transition: transform .5s;
-    cursor:pointer;
-}
-
-.card {
-    margin-top: 50px;
-    box-shadow: 0px 0px 2px 0px gray;
-
-}
-
-.card-detail{
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-}
-
-.card-detail i{
-    margin-right: 5px;
-}
-.heart{
-    display: flex;
-    flex-direction: row-reverse;
-    padding-right: 10px;
-    padding-bottom: 5px;
-}
-.music-box {
-    margin: auto;
-    min-width: 800px;
-    max-width: 1000px;
-}
-
-/*노래검색하기*/
-.input-group {
-    width: 1000px;
-    margin: auto;
-}
-
-.music-add {
-    width: 1000px;
-    margin: auto;
-    margin-top: 30px;
-}
-
-
-.mypost {
-    font-family: 'Varela Round', sans-serif;
-
-    width: 500px;
-    margin: 20px auto 0 auto;
-    padding: 20px;
-    box-shadow: 0 0 3px 0 gray;
-
-    display: none;
-}
-
-
+        }
 

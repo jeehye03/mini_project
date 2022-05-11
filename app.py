@@ -86,13 +86,11 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
 
 
-# 음악기록
+
 @app.route("/music", methods=["POST"])
 def music_post():
     url_receive = request.form['url_give']
     comment_receive = request.form['comment_give']
-    music_list = list(db.musics.find({}, {'_id': False}))
-    count = len(music_list) + 1
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -104,17 +102,12 @@ def music_post():
     og_title = soup.select_one('meta[property="og:title"]')
 
     image = og_image['content']
-    title = og_title['content'].split('-')[0]
-    artist = og_title['content'].split('-')[1]
+    title = og_title['content']
 
     doc = {
-        'num': count,
         'title':title,
         'image':image,
-        'comment':comment_receive,
-        'artist':artist,
-        'url':url_receive,
-        'done':0
+        'comment':comment_receive
     }
     db.musics.insert_one(doc)
 
@@ -125,21 +118,10 @@ def music_get():
     music_list = list(db.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
 
-# 게시글 삭제
-@app.route("/music/done", methods=["POST"])
-def music_done():
-    num_receive = request.form['num_give']
-
-    db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
-
-    return jsonify({'msg': '삭제 완료!'})
-
-# 검색
 @app.route("/search", methods=["POST"])
 def search_get():
     music_list = list(db.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
-
 
 
 if __name__ == '__main__':
