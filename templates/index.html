@@ -1,66 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!--jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <!-- Font Awesome CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!--jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <!-- Bulma CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <!-- Font Awesome CSS -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/static/style.css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Material+Icons%7CMaterial+Icons+Outlined%7CMaterial+Icons+Two+Tone%7CMaterial+Icons+Round%7CMaterial+Icons+Sharp"
-            rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
-    <title>메인 페이지</title>
-    <script>
-        $(document).ready(function () {
+        <link rel="stylesheet" href="/static/style.css">
+        <link
+                href="https://fonts.googleapis.com/css?family=Material+Icons%7CMaterial+Icons+Outlined%7CMaterial+Icons+Two+Tone%7CMaterial+Icons+Round%7CMaterial+Icons+Sharp"
+                rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
+        <title>메인 페이지</title>
+        <script>
+            $(document).ready(function () {
 
-            listing();
+                listing();
 
-        });
+            });
 
-        function home() {
-            window.location.href = ('/login')
-        }
-
-
-    </script>
+            function home() {
+                window.location.href = ('/login')
+            }
 
 
-    <style>
-        * {
-            font-family: 'Gowun Dodum', sans-serif;
-        }
-    </style>
+        </script>
 
 
-</head>
-<body>
-<div class="wrap-logo">
-    <div>
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
-                onclick="logout2()">로그아웃
-        </button>
+        <style>
+            * {
+                font-family: 'Gowun Dodum', sans-serif;
+            }
+        </style>
 
-    </div>
-    <div class="logo">
-        <h1 class="logo-font" onclick="home()">뮤레카</h1>
-    </div>
-</div>
-<div>
-    <nav class="navbar navbar-light bg-light">
-        <form class="container-fluid">
-            <div class="input-group">
+
+    </head>
+    <body>
+        <div class="wrap-logo">
+            <div>
+                <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
+                        onclick="logout2()">로그아웃
+                </button>
+
+            </div>
+            <div class="logo">
+                <h1 class="logo-font" onclick="home()">뮤레카</h1>
+            </div>
+        </div>
+        <div class="search">
+            <div class="check-box">
                 <div class="search-icon">
                     <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
                 </div>
@@ -80,56 +78,47 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </nav>
-                <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)"
+            <div class="search-box">
+                <div class="search-box-input">
+                    <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)"
                        aria-label="Username"
                        aria-describedby="basic-addon1">
-                <button type="button" class="btn btn-primary" onclick="search()">검색</button>
-                {#    <div>#}
-                {#        <nav class="navbar navbar-light bg-light">#}
-                {#            <form class="container-fluid">#}
-                {#                <div class="input-group">#}
-                {#                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>#}
-                {#                    <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기"#}
-                {#                           aria-label="Username"#}
-                {#                           aria-describedby="basic-addon1">#}
-                {#                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>#}
-                {#                </div>#}
-                {#            </form>#}
-                {#        </nav>#}
-                {#    </div>#}
+                </div>
+                <div class="search-box-btn">
+                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>
+                </div>
+
             </div>
+        </div>
 
-                <div class="music-add">
-                    <div class="d-grid gap-1">
-                        <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍
-                        </button>
-                    </div>
+        <div class="music-add">
+            <div class="d-grid gap-1">
+                <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍
+                </button>
+            </div>
+        </div>
+        <div class="mypost" id="post-box">
+            <div class="form-floating mb-3">
+                <input id="url" type="email" class="form-control">
+                <label>URL</label>
+            </div>
+            <div class="form-floating">
+                <textarea id="comment" class="form-control"></textarea>
+                <label for="comment">코멘트</label>
+            </div>
+            <div class="mybtns">
+                <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+                <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+            </div>
+        </div>
+        <div class="mycards" id="contents">
+            <ul id="mylist">
+                <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
                 </div>
-                <div class="mypost" id="post-box">
-                    <div class="form-floating mb-3">
-                        <input id="url" type="email" class="form-control">
-                        <label>URL</label>
-                    </div>
-                    <div class="form-floating">
-                        <textarea id="comment" class="form-control"></textarea>
-                        <label for="comment">코멘트</label>
-                    </div>
+            </ul>
+        </div>
 
-                    <div class="mybtns">
-                        <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
-                        <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
-                    </div>
-                </div>
-                <div class="mycards" id="contents">
-                    <ul id="mylist">
-                        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-                        </div>
-                    </ul>
-                </div>
+        <script src="{{ url_for('static', filename='mureca.js') }}"></script>
 
-                <script src="{{ url_for('static', filename='mureca.js') }}"></script>
-
-</body>
-</html>
+    </body>
+    </html>
