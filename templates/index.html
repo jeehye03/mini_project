@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome CSS -->
@@ -27,6 +29,10 @@
 
         });
 
+        function home(){
+            window.location.href=('/login')
+        }
+
 
     </script>
 
@@ -43,34 +49,54 @@
 <div class="wrap-logo">
     <div>
         <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
-            onclick="location.href='/' ">로그아웃
+            onclick="logout2()">로그아웃
          </button>
 
-        <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
-                onclick="location.href='/' ">프로필
-        </button>
     </div>
     <div class="logo">
-        <h1 class="logo-font">뮤레카</h1>
+        <h1 class="logo-font" onclick="home()">뮤레카</h1>
     </div>
 </div>
-    <div>
-        <nav class="navbar navbar-light bg-light">
-            <form class="container-fluid">
-                <div class="input-group">
-                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
-                    <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기"
-                           aria-label="Username"
-                           aria-describedby="basic-addon1">
-                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>
+<div>
+    <nav class="navbar navbar-light bg-light">
+        <form class="container-fluid">
+            <div class="input-group">
+                <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>
+                <div class="Checks">
+                <div class="form-check">
+                    <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        타이틀
+                    </label>
                 </div>
-            </form>
-        </nav>
-    </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        아티스트
+                    </label>
+                </div>
+                </div>
+                <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)" aria-label="Username"
+                       aria-describedby="basic-addon1">
+                <button type="button" class="btn btn-primary" onclick="search()">검색</button>
+{#    <div>#}
+{#        <nav class="navbar navbar-light bg-light">#}
+{#            <form class="container-fluid">#}
+{#                <div class="input-group">#}
+{#                    <span class="material-icons" style="margin: 10px 10px 0px 0px">headset</span>#}
+{#                    <input id='search_input' type="text" class="form-control" placeholder="노래 검색하기"#}
+{#                           aria-label="Username"#}
+{#                           aria-describedby="basic-addon1">#}
+{#                    <button type="button" class="btn btn-primary" onclick="search()">검색</button>#}
+{#                </div>#}
+{#            </form>#}
+{#        </nav>#}
+{#    </div>#}
     <div class="music-add">
         <div class="d-grid gap-1">
             <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍</button>
         </div>
+    </div>
         <div class="mypost" id="post-box">
             <div class="form-floating mb-3">
                 <input id="url" type="email" class="form-control">
@@ -93,26 +119,7 @@
             </ul>
         </div>
 
-        <div class="modal" id="modal-post">
-            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
-            <div class="modal-content">
-                <div class="box">
-                    <article class="media">
-                        <div class="media-content">
-                            <input type="text"  placeholder="um.."/>
-                            <button>수정하기</button>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <button id="input-post" onclick='$("#modal-post").addClass("is-active")'>댓글남기기</button>
-            <button class="modal-close is-large" aria-label="close"
-                    onclick='$("#modal-post").removeClass("is-active")'></button>
-        </div>
-
-
-
     <script src="{{ url_for('static', filename='mureca.js') }}"></script>
-</div>
+
 </body>
 </html>

@@ -96,46 +96,92 @@
 
     /* 검색 */
     function search() {
-        $('#cards-box').empty()
-        $.ajax({
-            type: 'POST',
-            url: '/search',
-            data: {},
-            success: function (response) {
-                let rows = response['musics']
-                for (let i = 0; i < rows.length; i++) {
-                    let title = rows[i]['title']
-                    let artist = rows[i]['artist']
-                    let image = rows[i]['image']
-                    let search = $('#search_input').val();
-                    if (title.includes(search)) {
+            $('#cards-box').empty()
+            $.ajax({
+                type: 'POST',
+                url: '/search',
+                data: {},
+                success: function (response) {
+                    let rows = response['musics']
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['title']
+                        let image = rows[i]['image']
+                        let comment = rows[i]['comment']
+                        let url = rows[i]['url']
+                        let artist = rows[i]['artist']
 
-                        let temp_html = ` <div class="col">
+                        let search = $('#search_input').val();
+                        let cho1 = $('input:checkbox[name=cho1]').is(':checked');
+                        let cho2 = $('input:checkbox[name=cho2]').is(':checked');
+                        if(cho1 == true){
+                        if(title.includes(search))
+                        {
+                            let temp_html = ` <div class="col">
                                             <div class="card">
-                                              <img src=${image}
-                                              class="card-img-top">
+                                                 <a href="${url}"><img src=${image}
+                                                  class="card-img-top"></a>
                                               <div class="card-body">
-                                                <h5 class="card-title">${title}</h5>
-                                                <p class="card-text">${artist}</p>
-                                                <span class="material-icons-outlined">favorite_border</span>
-                                              </div>
-                                            </div>`
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="card-text">${artist}</p>
+                                                </div>
+                                                <div class="card-detail">
+                                                     <i class="far fa-comment"></i>
+                                                     <p class="card-text">${comment}</p>
+                                                 </div>
+                                                 <div class="heart">
+                                                    <span class="material-icons-outlined">favorite_border</span>
+                                                </div>
+
+                                        </div>`
                         $('#cards-box').append(temp_html)
+                        }}
+                         if(cho2 == true){
+                            if(artist.includes(search))
+                        {
+                            let temp_html = `<div class="col">
+                                            <div class="card">
+                                                 <a href="${url}"><img src=${image}
+                                                  class="card-img-top"></a>
+                                              <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="card-text">${artist}</p>
+                                                </div>
+                                                <div class="card-detail">
+                                                     <i class="far fa-comment"></i>
+                                                     <p class="card-text">${comment}</p>
+                                                 </div>
+                                                 <div class="heart">
+                                                    <span class="material-icons-outlined">favorite_border</span>
+                                                </div>
+
+                                        </div>`
+                        $('#cards-box').append(temp_html)
+                        }
                     }
-
+                    console.log(response['musics'])
                 }
-
-            }
-        })
-    }
+            },})
+        }
 
 
 
 
+
+
+
+
+    /* 포스팅 박스 열고 닫기*/
     function open_box() {
         $('#post-box').show()
     }
 
     function close_box() {
         $('#post-box').hide()
+    }
+
+    /* 로그아웃 */
+    function logout2() {
+        $.removeCookie('mytoken', {path: '/'});
+
+        window.location.href = '/'
     }
