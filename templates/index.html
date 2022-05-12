@@ -67,15 +67,14 @@
                     </div>
                     <div class="checks">
                         <div class="form-check">
-                            <input class="form-check-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input class="check-box-input" name="cho1" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="check-box-label-title" for="flexCheckDefault">
                                 타이틀
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="cho2" type="checkbox" value="" id="flexCheckChecked"
-                                   checked><span class="on"></span>
-                            <label class="form-check-label" for="flexCheckChecked">
+                            <input class="check-box-input" name="cho2" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="check-box-label-artist" for="flexCheckChecked">
                                 아티스트
                             </label>
                         </div>
@@ -83,20 +82,18 @@
                 </div>
                 <div class="search-box">
                     <div class="search-box-input">
-                        <input id='search_input' type="text" class="form-control" placeholder="검색하기(대소문자 구별)"
-                               aria-label="Username"
-                               aria-describedby="basic-addon1">
+                        <input id='search_input' type="text" placeholder="검색하기(대소문자 구별)"/>
+                        <i class="fas fa-search" onclick="search()"></i>
                     </div>
-                    <div class="search-box-btn">
-                        <button type="button" class="btn btn-outline-dark" onclick="search()">검색</button>
-                    </div>
+
 
                 </div>
             </div>
 
             <div class="music-add">
                 <div class="d-grid gap-1">
-                    <button onclick="open_box()" class="btn btn-outline-secondary" type="button">😍노래 등록하기😍
+                    <button onclick="open_box()" class="btn btn-outline-secondary" type="button">
+                        <i class="far fa-edit"></i>노래 등록하기
                     </button>
                 </div>
             </div>
@@ -123,7 +120,6 @@
                 </div>
             </ul>
         </div>
-
         <div id="screen-main">
 
                 <img src="/static/logo.jpeg"/>

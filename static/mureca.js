@@ -36,7 +36,7 @@
                                                         <span>${time}</span>
                                                    </div>
                                                    <div class="like">
-                                                        <span>❤️</span>                         
+                                                        <span>🤍</span>                         
 <!--                                                       <span class="material-icons-outlined">favorite_border</span>-->
                                                    </div>
                                                </div>
