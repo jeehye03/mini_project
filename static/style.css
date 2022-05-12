@@ -186,6 +186,24 @@ input[type=checkbox]:checked + label:before{
     padding: 20px;
     box-shadow: 0 0 3px 0 gray;
     display: none;
+    position: relative;
+}
+
+.melon-btn{
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    border: 1px solid #dadada;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.melon-btn img{
+    width: 50px;
+    padding: 0 5px;
+    padding-bottom: 3px;
+    align-items: center;
 }
 
 

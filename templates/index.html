@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" type="image/x-icon" href="/static/logo.png" />
+
         <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -52,6 +53,9 @@
             <div class="logo-btn">
                 <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
                         onclick="logout2()">로그아웃
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" style="float: right; margin: 10px 10px 0px 0px"
+                        onclick="window.location.href = ('/withdrawal')">회원탈퇴
                 </button>
 
             </div>
@@ -102,16 +106,18 @@
         <div class="mypost" id="post-box">
             <div class="form-floating mb-3">
                 <input id="url" type="email" class="form-control">
-                <label>URL</label>
+                <label>멜론 URL</label>
+                <a href="https://www.melon.com/" class="melon-btn">
+                    <img src="/static/melon.png"/>
+                </a>
             </div>
             <div class="form-floating">
                 <textarea id="comment" class="form-control"></textarea>
                 <label for="comment">코멘트</label>
             </div>
             <div class="mybtns">
-                <button onclick="window.open('https://www.melon.com/')" type="button" class="btn btn-outline-dark">멜론</button>
-                <button onclick="posting()" type="button" class="btn btn-outline-dark">기록하기</button>
-                <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+                <button onclick="posting()" type="button" class="btn btn-outline-secondary">기록</button>
+                <button onclick="close_box()" type="button" class="btn btn-outline-secondary">닫기</button>
             </div>
         </div>
         <div class="mycards" id="contents">
