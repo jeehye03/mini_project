@@ -4,17 +4,13 @@
 
         <!-- Webpage Title -->
         <title>Log In | 뮤레카</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/static/logo.png" />
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
-
-
-<!--        <meta property="og:title" content="스위터 - 세상을 달달하게"/>-->
-<!--        <meta property="og:description" content="mini project for Web Plus"/>-->
-<!--        <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>-->
-<!--      나중에 수정-->
-
-
+        <meta property="og:title" content="mureca"/>
+        <meta property="og:description" content="music+Eureka 음악을 발견하다"/>
+        <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
 
 
         <!-- Required meta tags -->
@@ -38,16 +34,64 @@
         <style>
 
 
-            .title {
-                font-weight: 800;
-                font-size: 5rem;
-                font-family: 'Stylish', sans-serif;
+            @keyframes screenHide {
+                from {
+                    opacity: 1;
+                }
+
+                to {
+                    opacity: 0;
+                    visibility: hidden;
+                }
             }
 
-            .subtitle {
-                font-family: 'Gamja Flower', cursive;
-                font-size: 2rem;
 
+            #screen-login {
+                position: absolute;
+                z-index: 99;
+                height: 100vh;
+                width: 100vw;
+                font-size: 100px;
+                background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 0;
+                animation: screenHide 2s ease-in-out forwards;
+            }
+
+
+            body{
+                height: 100vh;
+                background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://images.unsplash.com/photo-1532637644947-13094c2745f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
+                background-repeat: no-repeat;
+                background-size: cover;
+
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+            }
+
+            .container{
+                width: 400px;
+            }
+
+            .login-logo{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-bottom: 10px;
+            }
+
+            .login-logo img{
+                width: 80px;
+                height: 80px;
+            }
+
+            .title {
+                font-size: 50px;
+                font-family: 'Stylish', sans-serif;
             }
 
             .help {
@@ -207,15 +251,14 @@
 
     </head>
     <body>
-        <section class="hero is-white">
-            <div class="hero-body has-text-centered" style="padding-bottom:1rem;margin:auto;">
-                <h1 class="title is-sparta">뮤레카</h1>
-                <h3 class="subtitle is-sparta">소제목</h3>
-            </div>
-        </section>
+    <div class="wrap">
         <section class="section">
             <div class="container">
                 <div class="box" style="max-width: 480px;margin:auto">
+                    <div class="login-logo">
+                        <img src="/static/logo.png">
+                        <span class="title">mureca</span>
+                    </div>
                     <article class="media">
                         <div class="media-content">
                             <div class="content">
@@ -294,6 +337,11 @@
 
             </div>
         </section>
+    </div>
+
+        <div id="screen-login">
+            <span><p>mureca;</p></span>
+        </div>
 
     </body>
 </html>

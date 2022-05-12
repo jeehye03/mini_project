@@ -13,15 +13,10 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.6yss5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',tlsCAFile=ca)
 db = client.mureca
 
-# client = MongoClient('mongodb://3.34.44.93', 27017, username="sparta", password="woowa")
-# db = client.dbsparta_plus_week4
-# db1 = client.mureca
-
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
-SECRET_KEY = 'SPARTA'
 
+SECRET_KEY = 'SPARTA'
 
 @app.route('/')
 def login():
@@ -87,6 +82,9 @@ def music_post():
     comment_receive = request.form['comment_give']
     music_list = list(db.musics.find({}, {'_id': False}))
     count = len(music_list) + 1
+    today = datetime.now()
+    time = today.strftime('%Y.%m.%d')
+
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -103,16 +101,17 @@ def music_post():
 
     doc = {
         'num': count,
-        'title':title,
-        'image':image,
-        'comment':comment_receive,
-        'artist':artist,
-        'url':url_receive,
-        'done':0
+        'title': title,
+        'image': image,
+        'comment': comment_receive,
+        'artist': artist,
+        'url': url_receive,
+        'time': time,
+        'like': 0
     }
     db.musics.insert_one(doc)
 
-    return jsonify({'msg':'등록 완료!'})
+    return jsonify({'msg': '등록 완료!'})
 
 @app.route("/music", methods=["GET"])
 def music_get():
@@ -124,7 +123,8 @@ def music_get():
 def music_done():
     num_receive = request.form['num_give']
 
-    db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
+    db.musics.delete_one({'num': int(num_receive)})
+    # db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
 
     return jsonify({'msg': '삭제 완료!'})
 
@@ -134,6 +134,24 @@ def search_get():
     music_list = list(db.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
 
+# 회원 탈퇴
+@app.route('/withdrawal', methods=['POST'])
+def sign_out():
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+    password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+
+    doc = {
+        "username": username_receive,
+        "password": password_hash,
+    }
+    db.users.delete_one(doc)
+    return jsonify({'result': 'success'})
+
+@app.route('/withdrawal')
+def withdrawal():
+    msg = request.args.get("msg")
+    return render_template('out.html', msg=msg)
 
 
 if __name__ == '__main__':

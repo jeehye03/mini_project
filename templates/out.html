@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+    <head>
+
+        <!-- Webpage Title -->
+        <title>withdrawal | mureca</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bulma CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <!-- Font Awesome CSS -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+        <style>
+
+
+            @keyframes screenHide {
+                from {
+                    opacity: 1;
+                }
+
+                to {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+
+
+            #screen-login {
+                position: absolute;
+                z-index: 99;
+                height: 100vh;
+                width: 100vw;
+                font-size: 100px;
+                background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 0;
+                animation: screenHide 2s ease-in-out forwards;
+            }
+
+
+            body{
+                height: 100vh;
+                background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://images.unsplash.com/photo-1532637644947-13094c2745f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
+                background-repeat: no-repeat;
+                background-size: cover;
+
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+            }
+
+            .container{
+                width: 400px;
+            }
+
+            .login-logo{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-bottom: 10px;
+            }
+
+            .login-logo img{
+                width: 80px;
+                height: 80px;
+            }
+
+            .title {
+                font-size: 50px;
+                font-family: 'Stylish', sans-serif;
+            }
+
+            .help {
+                color: gray;
+            }
+        </style>
+        <script>
+
+
+
+
+
+
+            function sign_out() {
+                let username = $("#input-username").val()
+                let password = $("#input-password").val()
+
+                if (username == "") {
+                    $("#help-id-login").text("아이디를 입력해주세요.")
+                    $("#input-username").focus()
+                    return;
+                } else {
+                    $("#help-id-login").text("")
+                }
+
+                if (password == "") {
+                    $("#help-password-login").text("비밀번호를 입력해주세요.")
+                    $("#input-password").focus()
+                    return;
+                } else {
+                    $("#help-password-login").text("")
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/withdrawal",
+                    data: {
+                        username_give: username,
+                        password_give: password
+                    },
+                    success: function (response) {
+                        console.log(username,password)
+                        alert('탈퇴하셨습니다')
+                        $.removeCookie('mytoken', {path: '/'});
+                        window.location.replace("/")
+                        }
+                    }
+                )
+
+            }
+
+
+        </script>
+
+    </head>
+    <body>
+
+        <section class="section">
+            <div class="container">
+                <div class="box" style="max-width: 480px;margin:auto">
+                    <div class="login-logo">
+                        <img src="/static/logo.png">
+                        <span class="title">mureca</span>
+                    </div>
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <div class="field has-addons">
+                                    <div class="control has-icons-left" style="width:100%">
+                                        <input id="input-username" class="input" type="text" placeholder="아이디">
+                                        <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="field">
+                                    <div class="control has-icons-left">
+                                        <input id="input-password" class="input" type="password" placeholder="비밀번호">
+                                        <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <div id="div-sign-in-or-up" class="has-text-centered">
+                                <nav class="level is-mobile">
+                                    <button class="level-item button is-sparta" onclick="sign_out()" >
+                                        회원탈퇴
+                                    </button>
+
+                                </nav>
+
+
+
+
+                        </div>
+                    </div></article>
+                </div>
+
+            </div>
+        </section>
+
+        <div id="screen-login">
+            <span><p>mureca;</p></span>
+        </div>
+
+    </body>
+</html>
