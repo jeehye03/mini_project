@@ -14,7 +14,6 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.6yss5.mongodb.net/myFir
 db = client.mureca
 
 
-
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -50,7 +49,7 @@ def sign_in():
     if result is not None:
         payload = {
          'id': username_receive,
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 1)  # 로그인 1시간 유지
+         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 12)  # 로그인 12시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -85,6 +84,9 @@ def music_post():
     comment_receive = request.form['comment_give']
     music_list = list(db.musics.find({}, {'_id': False}))
     count = len(music_list) + 1
+    today = datetime.now()
+    time = today.strftime('%Y.%m.%d')
+
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -101,16 +103,17 @@ def music_post():
 
     doc = {
         'num': count,
-        'title':title,
-        'image':image,
-        'comment':comment_receive,
-        'artist':artist,
-        'url':url_receive,
-        'done':0
+        'title': title,
+        'image': image,
+        'comment': comment_receive,
+        'artist': artist,
+        'url': url_receive,
+        'time': time,
+        'like': 0
     }
     db.musics.insert_one(doc)
 
-    return jsonify({'msg':'등록 완료!'})
+    return jsonify({'msg': '등록 완료!'})
 
 @app.route("/music", methods=["GET"])
 def music_get():
@@ -122,7 +125,8 @@ def music_get():
 def music_done():
     num_receive = request.form['num_give']
 
-    db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
+    db.musics.delete_one({'num': int(num_receive)})
+    # db.musics.update_one({'num':int(num_receive)}, {'$set': {'done': 1}})
 
     return jsonify({'msg': '삭제 완료!'})
 
@@ -132,18 +136,7 @@ def search_get():
     music_list = list(db.musics.find({}, {'_id': False}))
     return jsonify({'musics':music_list})
 
-@app.route('/login')
-def name():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"username": payload["id"]})
-        return render_template(user_info=user_info)
-    except jwt.ExpiredSignatureError:
-        return
-
-
-
+# 회원 탈퇴
 @app.route('/withdrawal', methods=['POST'])
 def sign_out():
     username_receive = request.form['username_give']
