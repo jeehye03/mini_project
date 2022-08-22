@@ -3,3 +3,4 @@
 
 Music + Eureka 음악을 발견하다.
 
+![](https://velog.velcdn.com/images/jeehye03/post/67c0c37a-fbc7-42ee-ac57-b2bbf83af2c2/image.png)
